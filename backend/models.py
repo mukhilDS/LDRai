@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, DateTime, ForeignKey
+from sqlalchemy import Column, String, DateTime, ForeignKey, Integer
 # sqlalchemy version of columns, VARCHAR, TIMESTAMP
 from sqlalchemy.dialects.postgresql import UUID
 # sqlalchemy version of UUID in postgreSQL
@@ -31,3 +31,13 @@ class CoupleMember(Base):
     couple_id = Column(UUID(as_uuid=True), ForeignKey("couples.id"), nullable=False)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
     joined_at = Column(DateTime, default=datetime.utcnow)
+
+class Checkin(Base):
+    __tablename__ = "checkins"
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
+    couple_id = Column(UUID(as_uuid=True), ForeignKey("couples.id"), nullable=False)
+    mood = Column(Integer, nullable=False)
+    stress = Column(Integer, nullable=False)
+    miss_you = Column(Integer, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
