@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, DateTime
+from sqlalchemy import Column, String, DateTime, ForeignKey
 # sqlalchemy version of columns, VARCHAR, TIMESTAMP
 from sqlalchemy.dialects.postgresql import UUID
 # sqlalchemy version of UUID in postgreSQL
@@ -18,3 +18,16 @@ class User(Base):
     hashed_password = Column(String(255), nullable=False)
     name = Column(String(100), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
+
+class Couple(Base):
+    __tablename__ = "couples"
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    invite_code = Column(String(10), unique=True, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+class CoupleMember(Base):
+    __tablename__ = "couple_members"
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    couple_id = Column(UUID(as_uuid=True), ForeignKey("couples.id"), nullable=False)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
+    joined_at = Column(DateTime, default=datetime.utcnow)
