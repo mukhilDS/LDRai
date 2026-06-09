@@ -1,4 +1,4 @@
-# BondAI - LDR Companion
+# LDR AI - LDR Companion
 
 AI-powered relationship companion for long-distance couples.
 
