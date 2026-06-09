@@ -44,10 +44,10 @@ class LoginRequest(BaseModel):
 def login(request: LoginRequest, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == request.email).first()
     if not user:
-        raise HTTPException(status_code=401, detail="Invalid email or password")
+        raise HTTPException(status_code=401, detail="Invalid email") #is this 100% not vaalid email??
     
     if not pwd_context.verify(request.password, user.hashed_password):
-        raise HTTPException(status_code=401, detail="Invalid email or password")
+        raise HTTPException(status_code=401, detail="Invalid password") #is this 100% not valid password?? and why do we prefer to say invalid email or password?? 
     
     token = jwt.encode(
         {"sub": str(user.id), "email": user.email},

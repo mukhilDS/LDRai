@@ -63,3 +63,36 @@ def get_today_checkin(current_user: User = Depends(get_current_user), db: Sessio
         "stress": checkin.stress,
         "miss_you": checkin.miss_you
     }
+
+@router.get("/feed")
+def get_feed(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    member = db.query(CoupleMember).filter(CoupleMember.user_id == current_user.id).first()
+    if not member:
+        raise HTTPException(status_code=400, detail="You are not in a couple yet")
+
+    partner = db.query(CoupleMember).filter(
+        CoupleMember.couple_id == member.couple_id,
+        CoupleMember.user_id != current_user.id
+    ).first()
+
+    if not partner:
+        return {"message": "Your partner hasn't joined yet"}
+
+    checkins = db.query(Checkin).filter(
+        Checkin.user_id == partner.user_id
+    ).order_by(Checkin.created_at.desc()).limit(7).all()
+
+    partner_user = db.query(User).filter(User.id == partner.user_id).first()
+
+    return {
+        "partner_name": partner_user.name,
+        "checkins": [
+            {
+                "mood": c.mood,
+                "stress": c.stress,
+                "miss_you": c.miss_you,
+                "date": c.created_at.strftime("%m-%d-%Y")
+            }
+            for c in checkins
+        ]
+    }
