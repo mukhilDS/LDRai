@@ -5,7 +5,15 @@ from couples import router as couples_router
 from checkins import router as checkins_router
 from ai import router as ai_router
 from dashboard import router as dashboard_router
+from fastapi.middleware.cors import CORSMiddleware
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "https://ldrai-frontend.vercel.app"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app = FastAPI()
 app.include_router(auth_router, prefix="/auth")
