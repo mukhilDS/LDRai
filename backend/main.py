@@ -9,7 +9,11 @@ from dashboard import router as dashboard_router
 
 
 app = FastAPI()
-allow_origins=["http://localhost:3000", "https://ld-rai.vercel.app"],
+allow_origins=[
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://ld-rai.vercel.app",
+],
 
 app.add_middleware(
     CORSMiddleware,
