@@ -7,7 +7,9 @@ from checkins import router as checkins_router
 from ai import router as ai_router
 from dashboard import router as dashboard_router
 
+
 app = FastAPI()
+allow_origins=["http://localhost:3000", "https://ld-rai.vercel.app"],
 
 app.add_middleware(
     CORSMiddleware,
