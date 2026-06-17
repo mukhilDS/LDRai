@@ -71,4 +71,11 @@ export const api = {
     });
     return res.json();
   },
+  
+  getCoupleStatus: async (token: string) => {
+  const res = await fetch(`${API_URL}/couples/status`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.json();
+},
 };
