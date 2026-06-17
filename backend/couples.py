@@ -62,3 +62,22 @@ def join_couple(invite_code: str, current_user: User = Depends(get_current_user)
     db.commit()
     
     return {"message": "Joined couple", "couple_id": str(couple.id)}
+
+@router.get("/status")
+def couple_status(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    member = db.query(CoupleMember).filter(CoupleMember.user_id == current_user.id).first()
+    if not member:
+        return {"has_couple": False}
+    
+    partner = db.query(CoupleMember).filter(
+        CoupleMember.couple_id == member.couple_id,
+        CoupleMember.user_id != current_user.id
+    ).first()
+    
+    couple = db.query(Couple).filter(Couple.id == member.couple_id).first()
+    
+    return {
+        "has_couple": True,
+        "has_partner": partner is not None,
+        "invite_code": couple.invite_code
+    }

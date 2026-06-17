@@ -15,7 +15,8 @@ export default function Login() {
     const res = await api.login(form.email, form.password);
     if (res.access_token) {
       localStorage.setItem("token", res.access_token);
-      router.push("/dashboard");
+      const status = await api.getCoupleStatus(res.access_token);
+      router.push(status.has_partner ? "/dashboard" : "/pair");
     } else {
       setError(res.detail || "Invalid credentials");
     }
