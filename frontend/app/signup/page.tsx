@@ -12,17 +12,14 @@ export default function Signup() {
 
   const handleSubmit = async () => {
     setLoading(true);
-    const res = await api.login(form.email, form.password);
-    if (res.access_token) {
-      localStorage.setItem("token", res.access_token);
-      const status = await api.getCoupleStatus(res.access_token);
-      router.push(status.has_partner ? "/dashboard" : "/pair");
+    const res = await api.signup(form.email, form.password, form.name);
+    if (res.user_id) {
+      router.push("/login");
     } else {
-      setError(res.detail || "Invalid credentials");
+      setError(res.detail || "Something went wrong");
     }
     setLoading(false);
   };
-
   return (
     <main className="min-h-screen bg-gray-950 text-white flex items-center justify-center px-6">
       <div className="w-full max-w-sm">
