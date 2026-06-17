@@ -97,21 +97,6 @@ export default function Dashboard() {
         </div>
       )}
 
-      <div className="bg-gray-900 rounded-xl p-5 mb-6">
-        <h2 className="font-semibold mb-3">Partner Connection</h2>
-        <button onClick={handleCreateCouple}
-          className="w-full border border-gray-700 hover:border-pink-500 py-2.5 rounded-lg text-sm mb-3 transition">
-          Create Couple & Get Invite Code
-        </button>
-        <div className="flex gap-2">
-          <input className="flex-1 bg-gray-800 rounded-lg px-3 py-2.5 text-sm outline-none"
-            placeholder="Enter invite code" value={joinCode}
-            onChange={e => setJoinCode(e.target.value)} />
-          <button onClick={handleJoinCouple}
-            className="bg-pink-600 hover:bg-pink-700 px-4 rounded-lg text-sm transition">Join</button>
-        </div>
-      </div>
-
       <button onClick={() => router.push("/report")}
         className="w-full border border-gray-700 hover:border-pink-500 py-3 rounded-lg text-sm transition">
         View Weekly Report →
