@@ -4,6 +4,7 @@ A memory-based AI companion that helps long-distance couples stay emotionally cl
 
 **Live App:** https://ld-rai.vercel.app
 **Live API Docs:** https://ldrai-production.up.railway.app/docs
+**Demo Video:** https://www.loom.com/share/77cbe35673494d029e3d44781e435a0d
 
 ---
 
