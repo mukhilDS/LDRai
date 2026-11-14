@@ -1,4 +1,4 @@
-const API_URL = "https://ldrai-production.up.railway.app";
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 export const api = {
   signup: async (email: string, password: string, name: string) => {
