@@ -49,6 +49,15 @@ export default function Pair() {
   return (
     <main className="min-h-screen bg-gray-950 text-white flex items-center justify-center px-6">
       <div className="w-full max-w-md">
+        <button
+          type="button"
+          aria-label="Back to login"
+          onClick={() => router.push("/login")}
+          className="mb-6 inline-flex items-center gap-2 rounded-lg border border-gray-700 px-4 py-2 text-sm font-medium text-gray-200 transition hover:border-pink-500 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
+        >
+          <span aria-hidden="true">←</span>
+          Back
+        </button>
         <h1 className="text-3xl font-bold mb-2">Pair with your partner</h1>
         <p className="text-gray-400 text-sm mb-8">
           Connect with your partner to start sharing check-ins and daily questions.
